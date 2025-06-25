@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SO/Collection Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SO/Collection Dashboard</h1>
+            <button id="refresh-button" class="refresh-button">Refresh</button>
+        </div>
+        <div class="date-range">
+            <label for="from-date">From Date:</label>
+            <input type="date" id="from-date">
+            <label for="to-date">To Date:</label>
+            <input type="date" id="to-date">
+            <label for="line-number">Line Number:</label>
+            <input type="text" id="line-number" placeholder="Enter line number (e.g., 0)" value="0">
+            <button id="apply-date-line" class="action-button so">Apply</button>
+        </div>
+        <div class="info-section">
+            <div class="timestamps">
+                <p id="current-timestamp">Current Time: Loading...</p>
+                <p id="page-loaded-timestamp">Page Loaded: Loading...</p>
+                <p id="total-order-count">Total Order Count: 0</p>
+                <p id="division-order-count">Division Order Count: None</p>
+            </div>
+            <div class="row-counts">
+                <p id="total-row">Total Row: 0</p>
+                <p id="total-so-rows">SO API Row: 0</p>
+                <p id="total-co-rows">Collection API Row: 0</p>
+            </div>
+        </div>
+        <div id="dashboard" class="dashboard">
+            <div class="dashboard-row row-1">
+                <div class="card total-so" data-filter="total-so">
+                    <h2>Total SO</h2>
+                    <p id="total-so">0</p>
+                </div>
+                <div class="card total-co" data-filter="total-co">
+                    <h2>Total Collection</h2>
+                    <p id="total-co">0</p>
+                </div>
+                <div class="card completed-so" data-filter="completed-so">
+                    <h2>Completed SO</h2>
+                    <p id="completed-so">0</p>
+                </div>
+                <div class="card completed-co" data-filter="completed-co">
+                    <h2>Completed Collection</h2>
+                    <p id="completed-co">0</p>
+                </div>
+                <div class="card pending-so" data-filter="pending-so">
+                    <h2>Pending SO</h2>
+                    <p id="pending-so">0</p>
+                </div>
+                <div class="card pending-co" data-filter="pending-co">
+                    <h2>Pending Collection</h2>
+                    <p id="pending-co">0</p>
+                </div>
+            </div>
+            <div class="dashboard-row row-2">
+                <div class="card allocation-card">
+                    <h2>SO Transaction Division Wise</h2>
+                    <div class="allocation-grid line-grid" id="so-lines">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+                <div class="card allocation-card">
+                    <h2>CO Transaction Line Wise</h2>
+                    <div class="allocation-grid line-grid" id="co-lines">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+                <div class="card allocation-card">
+                    <h2>SO Server Allocation</h2>
+                    <div class="allocation-grid" id="so-servers">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+                <div class="card allocation-card">
+                    <h2>CO Server Allocation</h2>
+                    <div class="allocation-grid" id="co-servers">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="so-button" class="action-button so">SO</button>
+            <button id="co-button" class="action-button co">Collection</button>
+            <button id="export-data" class="action-button export">Export to Excel</button>
+            <button id="reset-filter" class="action-button reset">Reset Filter</button>
+        </div>
+        <div id="loading" class="loading">Loading data...</div>
+        <div id="error" class="error"></div>
+        <div id="debug" class="debug"></div>
+        <div class="table-container">
+            <h2 id="table-title" class="table-title">Collection</h2>
+            <table id="data-table">
+                <thead>
+                    <tr></tr>
+                    <tr></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <button id="first-page" disabled>First</button>
+            <button id="prev-page" disabled>Previous</button>
+            <select id="page-select"></select>
+            <span id="page-info"></span>
+            <button id="next-page" disabled>Next</button>
+            <button id="last-page" disabled>Last</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
